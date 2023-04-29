@@ -40,14 +40,10 @@ textarea {
     padding-left: 600px;
 }
 
-.name {
-    justify-items: center;
-
-}
-
 button {
     background: linear-gradient(#0f85b4, #cccece);
     margin-top: 15px;
     margin-left: 80px;
     padding: 5px 15px 5px 15px;
+    font-style: italic;
 }
