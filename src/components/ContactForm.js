@@ -56,13 +56,13 @@ const ContactForm = () => {
 
                 <div className='name'>
                     <div><label htmlFor='name'>Name:</label></div>
-                    <div><input id='name' type='text' value={form.name} onChange={handleChange} validate={required} /></div>
+                    <div><input id='name' type='text' value={form.name} onChange={handleChange} /></div>
 
                 </div>
 
                 <div className='email'>
                     <div><label htmlFor='email'>Email:</label></div>
-                    <div> <input id='email' type='email' value={form.email} onChange={handleChange} validate={validateEmail} /></div>
+                    <div> <input id='email' type='email' value={form.email} onChange={handleChange} /></div>
 
                 </div>
 
@@ -74,7 +74,7 @@ const ContactForm = () => {
 
                 <div className='message'>
                     <div><label htmlFor='message'>Message:</label></div>
-                    <div><textarea id='message' type='text' value={form.message} onChange={handleChange} validate={required} /></div>
+                    <div><textarea id='message' type='text' value={form.message} onChange={handleChange} /></div>
 
                 </div>
                 <button type="submit">
