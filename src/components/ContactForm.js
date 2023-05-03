@@ -12,6 +12,7 @@ const ContactForm = () => {
         message: '',
     });
 
+
     const handleChange = (event) => {
         setForm({
             ...form,
@@ -19,36 +20,57 @@ const ContactForm = () => {
         });
     };
 
-    const handleSubmit = (event) => {
+
+    const saveFormData = async () => {
+        const response = await fetch("https://my-json-server.typicode.com/tundeojediran/contacts-api-server/inquiries", {
+            method: 'POST',
+            body: JSON.stringify(form)
+        });
+        if (response.status !== 200) {
+            throw new Error('Request failed: ${response.status}')
+        }
+    }
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // alert(form.name + ' ' + form.email + ' ' + form.subject + ' ' + form.message);
-
-        alert("Form Submitted!")
-
-        setForm({
-            name: '',
-            email: '',
-            subject: '',
-            message: '',
-        })
-
-        const url = "https://my-json-server.typicode.com/tundeojediran/contacts-api-server/inquiries"
-
-        Axios.post(url, {
-            name: form.name,
-            email: form.email,
-            subject: form.subject,
-            message: form.message
-        })
-
-            .then(res => {
-                console.log(res.form)
+        try {
+            await saveFormData();
+            alert("Form Submitted!")
+            setForm({
+                name: '',
+                email: '',
+                subject: '',
+                message: '',
             })
+        }
 
-    };
+        catch (e) {
+            alert('Registration failed!')
+        }
+    }
+
+    // setForm({
+    //     name: '',
+    //     email: '',
+    //     subject: '',
+    //     message: '',
+    // })
+
+    // const url = "https://my-json-server.typicode.com/tundeojediran/contacts-api-server/inquiries"
+
+    // Axios.post(url, {
+    //     name: form.name,
+    //     email: form.email,
+    //     subject: form.subject,
+    //     message: form.message
+    // })
+
+    //     .then(res => {
+    //         console.log(res.form)
+    //     })
+
 
     return (
-        <div>
+        <div className='wrapper'>
 
             <p>Contact Us</p>
 
@@ -56,28 +78,28 @@ const ContactForm = () => {
 
                 <div className='name'>
                     <div><label htmlFor='name'>Name:</label></div>
-                    <div><input id='name' type='text' value={form.name} onChange={handleChange} /></div>
+                    <div><input id='name' type='text' placeholder='name' value={form.name} onChange={handleChange} /></div>
 
                 </div>
 
                 <div className='email'>
                     <div><label htmlFor='email'>Email:</label></div>
-                    <div> <input id='email' type='email' value={form.email} onChange={handleChange} /></div>
+                    <div> <input id='email' type='email' placeholder='email' value={form.email} onChange={handleChange} /></div>
 
                 </div>
 
                 <div className='subject'>
                     <div><label htmlFor='subject'>Subject:</label></div>
-                    <div><input id='subject' type='text' value={form.subject} onChange={handleChange} /></div>
+                    <div><input id='subject' type='text' placeholder='subject' value={form.subject} onChange={handleChange} /></div>
 
                 </div>
 
                 <div className='message'>
                     <div><label htmlFor='message'>Message:</label></div>
-                    <div><textarea id='message' type='text' value={form.message} onChange={handleChange} /></div>
+                    <div><textarea id='message' type='text' placeholder='message' value={form.message} onChange={handleChange} /></div>
 
                 </div>
-                <button type="submit">
+                <button type="submit" disabled={!form.email}>
                     Submit</button>
             </form>
 
